@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nepali Speech to Text Converter</title>
+    <!-- Your existing CSS -->
+    <script src="https://cdn.jsdelivr.net/npm/ffmpeg.js@4.2.9001/ffmpeg.min.js"></script>
+</head>
+<body>
+    <!-- Your existing HTML -->
+    
+    <script>
+        class AudioProcessor {
+            constructor() {
+                this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            }
+
+            async processAudio(file) {
+                // Convert to WAV using ffmpeg.js
+                const wavData = await this.convertToWav(file);
+                
+                // Split into chunks
+                const chunks = await this.splitIntoChunks(wavData);
+                
+                // Process each chunk
+                for (let i = 0; i < chunks.length; i++) {
+                    // Use Web Speech API for transcription
+                    const text = await this.transcribeChunk(chunks[i]);
+                    // Update UI with progress
+                    this.updateProgress(i + 1, chunks.length, text);
+                }
+            }
+
+            // ... implementation of helper methods ...
+        }
+    </script>
+</body>
+</html> 
