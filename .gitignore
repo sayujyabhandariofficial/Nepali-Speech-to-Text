@@ -1,0 +1,6 @@
+uploads/
+audio_chunks/
+transcriptions/
+*.wav
+*.mp3
+*.m4a
