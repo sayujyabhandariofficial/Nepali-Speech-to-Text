@@ -1,0 +1,19 @@
+{
+  "name": "nepali-speech-to-text",
+  "version": "1.0.0",
+  "description": "Nepali Speech to Text Converter",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^latest",
+    "electron-builder": "^latest"
+  },
+  "dependencies": {
+    "python-shell": "^latest"
+  }
+}

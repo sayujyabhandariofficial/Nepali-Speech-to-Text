@@ -3,36 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <title>Nepali Speech to Text Converter</title>
-    <!-- Your existing CSS -->
-    <script src="https://cdn.jsdelivr.net/npm/ffmpeg.js@4.2.9001/ffmpeg.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Web Audio API helpers -->
+    <script src="https://cdn.jsdelivr.net/npm/lamejs@1.2.1/lame.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/audio-buffer-utils@5.1.2/index.min.js"></script>
 </head>
 <body>
-    <!-- Your existing HTML -->
-    
-    <script>
-        class AudioProcessor {
-            constructor() {
-                this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
-            }
+    <div class="container">
+        <h1>Nepali Speech to Text Converter</h1>
+        
+        <form id="upload-form">
+            <div class="upload-container">
+                <div class="file-input-container">
+                    <label class="custom-file-input" id="file-input-label">
+                        Choose a File
+                        <input type="file" accept=".mp3,.m4a" required>
+                    </label>
+                    <div class="selected-file" id="file-name">No file chosen</div>
+                </div>
+                <input type="submit" value="Transcribe" class="transcribe-button" id="transcribe-btn" disabled>
+            </div>
+        </form>
 
-            async processAudio(file) {
-                // Convert to WAV using ffmpeg.js
-                const wavData = await this.convertToWav(file);
-                
-                // Split into chunks
-                const chunks = await this.splitIntoChunks(wavData);
-                
-                // Process each chunk
-                for (let i = 0; i < chunks.length; i++) {
-                    // Use Web Speech API for transcription
-                    const text = await this.transcribeChunk(chunks[i]);
-                    // Update UI with progress
-                    this.updateProgress(i + 1, chunks.length, text);
-                }
-            }
+        <div id="loading" style="display: none;">
+            <div class="processing-header">
+                <h3>Processing...</h3>
+                <div class="spinner"></div>
+            </div>
+            <div class="progress-bar">
+                <div class="progress" id="progress-bar">0%</div>
+            </div>
+            <p>Files Processed: <span id="chunks-processed">0</span> / <span id="total-chunks">0</span></p>
+        </div>
 
-            // ... implementation of helper methods ...
-        }
-    </script>
+        <div id="transcription-container">
+            <h2>Transcription:</h2>
+            <div id="transcription"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html> 
